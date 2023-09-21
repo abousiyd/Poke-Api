@@ -1,51 +1,21 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Poke from "../api";
+import { useNavigate } from "react-router-dom";
+import usePokemon from "../hooks/usePokemon";
 
 const PokemonDetail = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [pokemon, setPokemon] = useState(null);
-  const { pokeId } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const {pokemon, loading, error} = usePokemon();
 
-  useEffect(() => {
-    const fetchPokemonDetail = async () => {
-      try {
-        const data = await Poke.find(pokeId);
+  console.log(pokemon, 888)
 
-        setPokemon({
-          name: data.name,
-          image: data.sprites.front_default,
-        });
-
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    fetchPokemonDetail();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!pokemon) {
-    return <div>Pokemon not found.</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!pokemon) return <div>Pokemon not found.</div>;
 
   return (
     <div>
       <span onClick={() => navigate(-1)}>Back</span>
       <h1>{pokemon.name}</h1>
-      <img src={pokemon.image} alt={pokemon.name} />
+      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
     </div>
   );
 };
