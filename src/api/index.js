@@ -1,23 +1,22 @@
 import { DOMAIN_API, DEFAULT_ERROR_MESSAGE } from "../commons/constants";
 
+async function fetchData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(DEFAULT_ERROR_MESSAGE);
+  }
+  return response.json();
+}
+
 const Post = {
   async all(query) {
     try {
-      const response = await fetch(`${DOMAIN_API}/${query}`);
-
-      if (!response.ok) throw new Error(DEFAULT_ERROR_MESSAGE);
-
-      const data = await response.json();
-      const results = data.results;
-      const count = data.count;
+      const data = await fetchData(`${DOMAIN_API}/${query}`);
+      const { results, count } = data;
 
       const pokemonData = await Promise.all(
         results.map(async (pokemon) => {
-          const res = await fetch(pokemon.url);
-
-          if (!res.ok) throw new Error(DEFAULT_ERROR_MESSAGE);
-
-          const pokemonData = await res.json();
+          const pokemonData = await fetchData(pokemon.url);
           return {
             name: pokemonData.name,
             image: pokemonData.sprites.front_default,
@@ -32,10 +31,7 @@ const Post = {
   },
   async find(pokeName) {
     try {
-      const response = await fetch(`${DOMAIN_API}/${pokeName}`);
-      if (!response.ok) throw new Error(DEFAULT_ERROR_MESSAGE);
-
-      const data = await response.json();
+      const data = await fetchData(`${DOMAIN_API}/${pokeName}`);
       return data;
     } catch (error) {
       console.log(error);
