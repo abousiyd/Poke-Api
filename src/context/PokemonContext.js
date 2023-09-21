@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState,  useEffect, } from 'react';
-
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PokemonContext = createContext();
@@ -12,11 +11,8 @@ export const PokemonProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -39,13 +35,14 @@ export const PokemonProvider = ({ children }) => {
     setCurrentPage(parseInt(searchParams.get("page")) || 1);
   }, [searchParams]);
 
- 
   const contextValue = {
-    currentPage,
     setCurrentPage,
-    totalPages,
     setTotalPages,
-    nextPage, previousPage, backToHome 
+    previousPage,
+    currentPage,
+    totalPages,
+    backToHome,
+    nextPage
   };
 
   return (

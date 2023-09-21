@@ -1,32 +1,27 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { usePokemonContext } from '../context/PokemonContext';
+import { useState, useEffect } from "react";
+import { usePokemonContext } from "../context/PokemonContext";
+import Poke from "../api";
 
 const usePokemonList = () => {
-    const { currentPage, setCurrentPage, totalPages, setTotalPages, nextPage, previousPage } = usePokemonContext();
+  const {
+    setCurrentPage,
+    setTotalPages,
+    previousPage,
+    currentPage,
+    totalPages,
+    nextPage
+  } = usePokemonContext();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [pokemons, setPokemons] = useState([]);
-
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(currentPage - 1) * 10}`
-        );
-        const results = response.data.results;
-        const pokemonData = await Promise.all(
-          results.map(async (pokemon) => {
-            const res = await axios.get(pokemon.url);
-            return {
-              name: res.data.name,
-              image: res.data.sprites.front_default,
-            };
-          })
-        );
+        const query = `?limit=10&offset=${(currentPage - 1) * 10}`;
+        const { pokemonData, count } = await Poke.all(query);
         setPokemons(pokemonData);
-        setTotalPages(Math.ceil(response.data.count / 10)); // Assuming 10 Pokémon per page
+        setTotalPages(Math.ceil(count / 10));
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -37,7 +32,16 @@ const usePokemonList = () => {
     fetchData();
   }, [currentPage]);
 
-  return { loading, error, pokemons, currentPage, totalPages, setCurrentPage, nextPage, previousPage };
+  return {
+    setCurrentPage,
+    previousPage,
+    currentPage,
+    totalPages,
+    pokemons,
+    nextPage,
+    loading,
+    error
+  };
 };
 
 export default usePokemonList;
