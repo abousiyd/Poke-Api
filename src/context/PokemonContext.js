@@ -8,11 +8,11 @@ export const usePokemonContext = () => {
 };
 
 export const PokemonProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const page = searchParams.get("page");
+  const [currentPage, setCurrentPage] = useState(page || 1);
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -32,7 +32,7 @@ export const PokemonProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setCurrentPage(parseInt(searchParams.get("page")) || 1);
+    setCurrentPage(parseInt(page) || 1);
   }, [searchParams]);
 
   const contextValue = {
