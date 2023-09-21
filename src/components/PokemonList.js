@@ -23,7 +23,6 @@ function PokemonList() {
 
   return (
     <>
-      <h1 className="pokemon-title">Pokemons</h1>
 
       <div className="pokemon-list">
         {pokemons.map((pokemon) => (
