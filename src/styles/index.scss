@@ -1,2 +1,14 @@
 
-@import "./modules/pokemonList";
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+
+body {
+    background-color: whitesmoke;
+    font-family: 'Pokemon Solid', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@import "./modules/_pokemonList";
+@import "./modules/_pokemonCard";
+

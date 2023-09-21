@@ -1,22 +1,24 @@
+.pokemon-title {
+  font-size: 5rem;
+  color: gold;
+  -webkit-text-stroke: 3px blue;
+  letter-spacing: 5px;
+}
+
 .pokemon-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
+  
     @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr); 
+      grid-template-columns: repeat(3, 1fr);
     }
+  
     @media screen and (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr); 
     }
+  
     grid-gap: 20px; 
   
-
-    &__title {
-        text-align: center;
-        font-family: "Luckiest Guy";
-        font-weight: 900;
-        color: yellow;
-        -webkit-text-stroke: 0.1rem blue;
-    }
     .pokemon-item {
       display: flex;
       flex-direction: column;

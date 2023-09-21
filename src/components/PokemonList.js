@@ -1,4 +1,15 @@
+import { Link } from 'react-router-dom';
 import usePokemonList from '../hooks/usePokemonList';
+
+
+const PokemonCard = ({ name, image }) => {
+  return (
+    <Link className="pokemon-card" to={`/${name}`}>
+      <img src={image} alt={name} className="pokemon-image" />
+      <h2 className="pokemon-name">{name}</h2>
+    </Link>
+  );
+};
 
 function PokemonList() {
   const {
@@ -20,20 +31,13 @@ function PokemonList() {
   
 
   return (
-    <div className="pokeList">
-      <h1 className="pokeList__title">Pokémon List</h1>
-      
+    <>
 
-      <div className='pokemon-list'>
-      {pokemons.map((pokemon, index) => (
-        <div key={index} className='pokemon-item'>
-          <p className='pokemon-name'>{pokemon.name}</p>
-          <img
-            src={pokemon.image}
-            alt={pokemon.name}
-            className='pokemon-image'
-          />
-        </div>
+    <h1 className="pokemon-title">Pokemons</h1>
+
+    <div className='pokemon-list'>
+      {pokemons.map((pokemon) => (
+        <PokemonCard {...pokemon} key={pokemon.name}/>
       ))}
     </div>
 
@@ -55,7 +59,7 @@ function PokemonList() {
           Next
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

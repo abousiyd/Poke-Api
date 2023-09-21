@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useParams,  useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-
 const PokemonDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
