@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import usePokemon from "../hooks/usePokemon";
+import "../styles/modules/_pokemonDetail.scss"
 
 const PokemonDetail = () => {
   const navigate = useNavigate()
@@ -15,15 +16,17 @@ const PokemonDetail = () => {
 
 
   return (
-    <div class="pokemon-card">
-      <span class="pokemon-card__back-button" onClick={() => navigate(-1)}>Back</span>
-      <h1 class="pokemon-card__name">{pokemon.name}</h1>
-      <img class="pokemon-card__image" src={pokemon.sprites.front_default} alt={pokemon.name} />
-      <p class="pokemon-card__info">Height: {pokemon.height / 10} meters</p>
-      <p class="pokemon-card__info">Weight: {pokemon.weight / 10} kilograms</p>
-      <p class="pokemon-card__info">Abilities: {abilities}</p>
-      <p class="pokemon-card__info">Types: {types}</p>
-    </div>
+    <>
+      <span onClick={() => navigate(-1)}>Back</span>
+      <div class="pokemonDetail">
+        <h1>{pokemon.name}</h1>
+        <img  src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <p>Height: {pokemon.height / 10} meters</p>
+        <p>Weight: {pokemon.weight / 10} kilograms</p>
+        <p>Abilities: {abilities}</p>
+        <p>Types: {types}</p>
+      </div>
+    </>
 
   );
 };

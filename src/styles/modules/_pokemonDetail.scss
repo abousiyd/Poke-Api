@@ -1,12 +1,24 @@
-/* Estilos para el bloque principal .pokemon-card */
-.pokemon-card {
+.pokemonDetail{
+    margin-top: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 2rem;
-    background-color: red;
+    height: 60%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+
+    h1 {
+        text-align: center;
+        font-family: "Luckiest Guy";
+        font-weight: 900;
+    }
+    img {
+        height: 60%;
+        width: 60%;
+    }
 }
 
 // /* Estilos para el elemento .pokemon-card__back-button */

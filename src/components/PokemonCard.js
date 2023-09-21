@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../styles/modules/_pokemonCard.scss"
 
 const PokemonCard = ({ name, image }) => {
   return (

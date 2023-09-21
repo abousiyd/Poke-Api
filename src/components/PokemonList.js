@@ -1,6 +1,7 @@
 import PokemonCard from "./PokemonCard";
 import Pagination from "./Pagination";
 import usePokemonList from "../hooks/usePokemonList";
+import "../styles/modules/_pokemonList.scss"
 
 function PokemonList() {
   const {
