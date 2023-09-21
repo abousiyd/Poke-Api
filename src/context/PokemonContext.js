@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PokemonContext = createContext();
@@ -30,10 +30,6 @@ export const PokemonProvider = ({ children }) => {
     setCurrentPage(1);
     navigate("/");
   };
-
-  useEffect(() => {
-    setCurrentPage(parseInt(page) || 1);
-  }, [searchParams]);
 
   const contextValue = {
     setCurrentPage,
