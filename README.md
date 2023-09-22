@@ -22,6 +22,6 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### To run test: bpm run test
+### To run test: npm run test
 
 ![Iskra preview](./doc/img/img-3.png)
