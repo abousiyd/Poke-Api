@@ -1,39 +1,27 @@
-.pokemon-title {
-  font-size: 5rem;
-  color: gold;
-  -webkit-text-stroke: 3px blue;
-  letter-spacing: 5px;
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  grid-gap: 20px;
 }
 
-.pokemon-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-  
-    @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  
-    @media screen and (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr); 
-    }
-  
-    grid-gap: 20px; 
-  
-    .pokemon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-  
-      .pokemon-name {
-        font-weight: bold;
-        margin-bottom: 8px;
-      }
-  
-      .pokemon-image {
-        max-width: 100%;
-        height: auto;
-      }
-    }
-  }
-  
+.pagination-button {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border: 0;
+  outline: 0;
+  padding: 10px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+}

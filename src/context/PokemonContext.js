@@ -11,7 +11,7 @@ export const PokemonProvider = ({ children }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const page = searchParams.get("page");
+  const page = Number(searchParams.get("page"));
   const [currentPage, setCurrentPage] = useState(page || 1);
 
   const nextPage = () => {

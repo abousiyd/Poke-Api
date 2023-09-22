@@ -1,12 +1,9 @@
-
-// @import url('https://fonts.cdnfonts.com/css/pokemon-solid');
-
 body {
-    background-color: whitesmoke;
-    font-family: 'Pokemon Solid', sans-serif;
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../../public/green-poke.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-

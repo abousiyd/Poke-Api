@@ -24,19 +24,18 @@ function PokemonList() {
 
   return (
     <>
-
-      <div className="pokemon-list">
-        {pokemons.map((pokemon) => (
-          <PokemonCard {...pokemon} key={pokemon.name} />
-        ))}
-      </div>
-
       <Pagination
         previousPage={previousPage}
         currentPage={currentPage}
         totalPages={totalPages}
         nextPage={nextPage}
       />
+
+      <div className="list">
+        {pokemons.map((pokemon) => (
+          <PokemonCard {...pokemon} key={pokemon.name} />
+        ))}
+      </div>
     </>
   );
 }

@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { FaChevronLeft } from 'react-icons/fa';
+
 import usePokemon from "../hooks/usePokemon";
 import "../styles/modules/_pokemonDetail.scss"
 
 const PokemonDetail = () => {
   const navigate = useNavigate()
-  const {pokemon, loading, error} = usePokemon();
+  const { pokemon, loading, error } = usePokemon();
 
 
   if (loading) return <div>Loading...</div>;
@@ -17,10 +19,10 @@ const PokemonDetail = () => {
 
   return (
     <>
-      <span onClick={() => navigate(-1)}>Back</span>
-      <div class="pokemonDetail">
-        <h1>{pokemon.name}</h1>
-        <img  src={pokemon.sprites.front_default} alt={pokemon.name} />
+      <div className="detail">
+        <span className="detail-back" onClick={() => navigate(-1)}><FaChevronLeft /></span>
+        <h1 className="detail-itle">{pokemon.name}</h1>
+        <img className="detail-image" src={pokemon.sprites.front_default} alt={pokemon.name} />
         <p>Height: {pokemon.height / 10} meters</p>
         <p>Weight: {pokemon.weight / 10} kilograms</p>
         <p>Abilities: {abilities}</p>

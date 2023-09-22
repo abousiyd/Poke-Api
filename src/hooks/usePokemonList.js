@@ -18,7 +18,7 @@ const usePokemonList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const query = `?limit=10&offset=${(currentPage - 1) * 10}`;
+        const query = `?limit=12&offset=${(currentPage - 1) * 10}`;
         const { pokemonData, count } = await Poke.all(query);
         setPokemons(pokemonData);
         setTotalPages(Math.ceil(count / 10));
