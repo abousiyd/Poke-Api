@@ -72,80 +72,90 @@ En general, la abstracción del código no es óptima y es necesario mejorar la 
   Esta clase sirve como base para otros tipos de contenido multimedia.
 */
 
+
 class MultimediaContent {
-  constructor(streamingPrice, downloadPrice) {
-    this.streamingPrice = streamingPrice;
-    this.downloadPrice = downloadPrice;
+    constructor(title, streamingPrice, downloadPrice) {
+      this.title = title;
+      this.streamingPrice = streamingPrice;
+      this.downloadPrice = downloadPrice;
+    }
   }
-}
-
-/*
-  Esta clase hereda de MultimediaContent y agrega una propiedad adicional llamada additionalFee. 
-  Representa contenido premium que tiene un costo adicional además de los precios de transmisión y descarga.
-*/
-
-class PremiumContent extends MultimediaContent {
-  constructor(streamingPrice, downloadPrice, additionalFee) {
-    super(streamingPrice, downloadPrice);
-    this.additionalFee = additionalFee;
+  
+  /*
+    Esta clase hereda de MultimediaContent y agrega una propiedad adicional llamada additionalFee. 
+    Representa contenido premium que tiene un costo adicional además de los precios de transmisión y descarga.
+  */
+  
+  class PremiumContent extends MultimediaContent {
+    constructor(title, streamingPrice, downloadPrice, additionalFee) {
+      super(title, streamingPrice, downloadPrice);
+      this.additionalFee = additionalFee;
+    }
   }
-}
-
-// Esta clase representa un servicio multimedia genérico y toma un objeto.
-class Service {
-  constructor(multimediaContent) {
-    this.multimediaContent = multimediaContent;
-  }
-}
-
-/* StreamingService y DownloadService: estas dos clases son subclases de Service y representan servicios de Streaming y Download, 
-  respectivamente. Heredan la propiedad multimediaContent de la clase base Service.
-*/
-
-class StreamingService extends Service {
-  constructor(multimediaContent) {
-    super(multimediaContent);
-  }
-}
-
-class DownloadService extends Service {
-  constructor(multimediaContent) {
-    super(multimediaContent);
-  }
-}
-
-// La clase RegisterUser es la que realiza el cálculo del costo total de los servicios seleccionados por un usuario.
-
-class RegisterUser {
-  constructor(services = []) {
-    this.services = services;
-  }
-
-  getTotal() {
-    let total = 0;
-
-    for (const service of this.services) {
-      const multimediaContent = service.multimediaContent;
-
-      total += multimediaContent.streamingPrice;
-      total += multimediaContent.downloadPrice;
-
-      if (multimediaContent instanceof PremiumContent) {
-        total += multimediaContent.additionalFee;
-      }
+  
+  // Esta clase representa un servicio multimedia genérico y toma un objeto.
+  class Service {
+    constructor(multimediaContent) {
+      this.timestamp = Date.now();
+      this.multimediaContent = multimediaContent;
     }
 
-    return total;
+    getMultimediaContent() {
+      return this.multimediaContent;
+    }
   }
-}
+  
+  /* StreamingService y DownloadService: estas dos clases son subclases de Service y representan servicios de Streaming y Download, 
+    respectivamente. Heredan la propiedad multimediaContent de la clase base Service.
+  */
+  
+  class StreamingService extends Service {
+    constructor(multimediaContent) {
+      super(multimediaContent);
+    }
+  }
+  
+  class DownloadService extends Service {
+    constructor(multimediaContent) {
+      super(multimediaContent);
+    }
+  }
+  
+  // La clase RegisterUser es la que realiza el cálculo del costo total de los servicios seleccionados por un usuario.
+  
+  class RegisterUser {
+    constructor(services = [], email) {
+      this.services = services;
+      this.email = email;
+    }
+  
+    getTotal() {
+      let total = 0;
+  
+      for (const service of this.services) {
+        const multimediaContent = service.multimediaContent;
+        
+        total += multimediaContent.streamingPrice;
+        total += multimediaContent.downloadPrice;
+        
+        if (multimediaContent instanceof PremiumContent) {
+            total += multimediaContent.additionalFee;
+        }
+      }
+  
+      return total;
+    }
+  }
+  
+  // Ejemplo:
+  const premiumContent = new PremiumContent('Avatar', 10, 2, 5);
 
-// Ejemplo:
-const premiumContent = new PremiumContent(5, 10, 2);
-const streamingService = new StreamingService(premiumContent);
-const downloadService = new DownloadService(premiumContent);
 
-const user = new RegisterUser([streamingService, downloadService]);
+  const streamingService = new StreamingService(premiumContent);
+  const downloadService = new DownloadService(premiumContent);
 
-console.log(user.getTotal());
-
-```
+  console.log(downloadService.getMultimediaContent())
+  
+  const user = new RegisterUser([streamingService, downloadService]);
+  
+  console.log(user.getTotal());
